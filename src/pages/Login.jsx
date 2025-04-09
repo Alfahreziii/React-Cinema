@@ -1,5 +1,5 @@
 
-function LoginPage() {
+const LoginPage = () => {
   return (
     <div className="">LoginPage</div>
   )
