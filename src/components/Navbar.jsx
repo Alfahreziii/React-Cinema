@@ -27,7 +27,7 @@ const Navbar = ({ links }) => {
                 <img src="/images/logo2.png" alt="" className="w-[30px] mr-10 min-[710px]:hidden"/>
                 {links.map((link) => (
                     <NavLink
-                    key={link.name}
+                    key={links.id}
                     to={link.path}
                     className={({ isActive }) =>
                         isActive ? "text-white mx-10 max-[710px]:mx-3 text-lg active" : "hover:underline text-white mx-10 max-[710px]:mx-3 text-lg"
