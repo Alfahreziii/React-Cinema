@@ -13,7 +13,7 @@ const PasswordInput = ({
 
   return (
     <div className="w-full mt-6">
-      <label htmlFor={id} className="text-white text-lg font-lato font-medium mb-2 block">
+      <label htmlFor={id} className="text-white max-[500px]:text-base max-[500px]:font-light  text-lg font-lato font-medium mb-2 block">
         {label}
       </label>
       <div className="relative w-full">
