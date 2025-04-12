@@ -8,9 +8,9 @@ import genre from "../data/genre.js";
 const Layout = () => {
 
   useEffect(() => {
-    document.body.classList.add('bg-home');
+    document.body.classList.add('home');
     return () => {
-      document.body.classList.remove('bg-home');
+      document.body.classList.remove('home');
     };
   }, []);
 

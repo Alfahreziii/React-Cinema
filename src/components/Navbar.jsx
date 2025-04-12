@@ -30,7 +30,7 @@ const Navbar = ({ links }) => {
                     key={links.id}
                     to={link.path}
                     className={({ isActive }) =>
-                        isActive ? "text-white mx-10 max-[710px]:mx-3 text-lg active" : "hover:underline text-white mx-10 max-[710px]:mx-3 text-lg"
+                        isActive ? "text-white mx-10 max-[710px]:mx-3 text-lg active" : "text-white mx-10 max-[710px]:mx-3 text-lg"
                     }
                     >
                     {link.name}
