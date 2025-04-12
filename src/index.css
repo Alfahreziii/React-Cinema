@@ -11,9 +11,6 @@
 
 .register {
     @apply bg-[url(/images/register.jpg)] bg-no-repeat bg-center bg-cover bg-fixed min-h-[100vh];
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .bg-hero {
