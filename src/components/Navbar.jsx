@@ -20,17 +20,17 @@ const Navbar = ({ links }) => {
     }, []);
 
   return (
-    <nav className="bg-[#181A1C] w-full top-0 px-16 max-[780px]:px-8 py-5 fixed z-[99999]">
+    <nav className="bg-[#181A1C] w-full top-0 px-16 max-[480px]:px-5 max-[780px]:px-8 py-5 fixed z-[99999]">
         <div className="flex items-center">
             <div className="flex">
                 <img src="/images/logo.png" alt="" className="w-[100px] mr-10 max-[710px]:hidden"/>
-                <img src="/images/logo2.png" alt="" className="w-[30px] mr-10 min-[710px]:hidden"/>
+                <img src="/images/logo2.png" alt="" className="w-[30px] mr-10 max-[480px]:mr-1 min-[710px]:hidden"/>
                 {links.map((link) => (
                     <NavLink
                     key={links.id}
                     to={link.path}
                     className={({ isActive }) =>
-                        isActive ? "text-white mx-10 max-[710px]:mx-3 text-lg active" : "text-white mx-10 max-[710px]:mx-3 text-lg"
+                        isActive ? "text-white mx-10 max-[710px]:mx-3 max-[480px]:text-base text-lg active" : "max-[480px]:text-base text-white mx-10 max-[710px]:mx-3 text-lg"
                     }
                     >
                     {link.name}
