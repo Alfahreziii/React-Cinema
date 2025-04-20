@@ -6,6 +6,8 @@ const PasswordInput = ({
   placeholder = "Masukkan Kata Sandi",
   value,
   onChange,
+  ...props
+
 }) => {
   const [showPassword, setShowPassword] = useState(false);
 
@@ -24,6 +26,7 @@ const PasswordInput = ({
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          {...props}
         />
         <button
           type="button"

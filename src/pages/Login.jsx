@@ -1,8 +1,28 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavLink, Link } from "react-router-dom";
+import { loginUser } from "../services/authService";
 import LoginInput from "../components/LoginInput";
 import PasswordInput from "../components/PasswordInput";
+
   const LoginPage = () => {
+    const [form, setForm] = useState({ email: "", password: "" });
+    const [error, setError] = useState("");
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setForm({ ...form, [name]: value });
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const user = loginUser(form.email, form.password);
+    
+      if (!user) {
+        setError("Email atau password salah!");
+      }
+    };
+    
+
     useEffect(() => {
       document.body.classList.add('login');
       return () => {
@@ -18,16 +38,20 @@ import PasswordInput from "../components/PasswordInput";
               <h1 className="text-center text-4xl max-[1300px]:text-3xl text-white font-normal">Masuk</h1>
               <p className="text-white text-sm font-normal mt-2">Selamat datang kembali!</p>
           </div>
-          <form action="" className="w-full"> 
+          <form onSubmit={handleSubmit} className="w-full"> 
               <LoginInput
-                id="username"
-                label="Username"
-                placeholder="Masukkan Username"
+                id="email"
+                label="Email"
+                name="email"
+                placeholder="Masukkan Email"
+                onChange={handleChange}
               />
               <PasswordInput
                 id="password"
                 label="Kata Sandi"
+                name="password"
                 placeholder="Masukkan Kata Sandi"
+                onChange={handleChange}
               />
 
               <div className="flex max-[500px]:text-sm">
@@ -35,9 +59,9 @@ import PasswordInput from "../components/PasswordInput";
                   <NavLink to="#" className="mt-3 text-white">Lupa kata sandi?</NavLink>
               </div>
               
-              <NavLink to="/home" className="mt-8 font-semibold text-white bg-[#3D4142] border border-[#E7E3FC3B]/35 rounded-full flex justify-center items-center text-base max-[1300px]:text-sm h-[55px] w-full">
+              <button type="submit" className="mt-8 font-semibold text-white bg-[#3D4142] border border-[#E7E3FC3B]/35 rounded-full flex justify-center items-center text-base max-[1300px]:text-sm h-[55px] w-full">
                   Masuk
-              </NavLink>
+              </button>
 
               <h1 className="mx-auto text-[#9D9EA1] text-sm w-max my-2">Atau</h1>
               
@@ -45,7 +69,8 @@ import PasswordInput from "../components/PasswordInput";
                   <img src="/images/google.png" alt="" className="w-[20px]" />
                   <span className="text-white ml-5 max-[1300px]:text-sm">Masuk dengan Google</span>
               </NavLink>
-          </form> 
+          </form>
+          {error && <p style={{ color: "red" }}>{error}</p>}
       </div>
     </div>
   )

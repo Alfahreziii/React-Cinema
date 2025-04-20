@@ -5,15 +5,16 @@ import RegisterPage from "./pages/Register.jsx"
 import HomePage from "./pages/HomePage.jsx"
 import Layout from "./components/Layout.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 const Router = () => {
 
     return (
         <BrowserRouter>  
             <Routes>
-                <Route path="/" element={<LoginPage />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
 
-                <Route path="home" element={<Layout />}>
+                <Route path="home" element={ <ProtectedRoute><Layout /></ProtectedRoute>}>
                     <Route index element={<HomePage />}/>
                     <Route path="profile" element={<ProfilePage />} />
                 </Route>

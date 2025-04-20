@@ -1,9 +1,23 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { NavLink, Link } from 'react-router-dom';
+import { registerUser } from "../services/authService"; 
 import LoginInput from '../components/LoginInput';
 import PasswordInput from '../components/PasswordInput';
 
+
 const RegisterPage = () => {
+    const [form, setForm] = useState({ name: "", email: "", password: "" });
+
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setForm({ ...form, [name]: value });
+    };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      registerUser(form.name, form.email, form.password);
+    };
+    
     useEffect(() => {
       document.body.classList.add('register');
       return () => {
@@ -19,29 +33,41 @@ const RegisterPage = () => {
               <h1 className="text-center max-[1300px]:text-3xl text-4xl font-lato text-white font-normal">Daftar</h1>
               <p className="font-lato text-white text-sm font-normal mt-2">Selamat datang</p>
           </div>
-          <form action="" className="w-full">
+          <form onSubmit={handleSubmit} className="w-full">
               <LoginInput
                 id="username"
                 label="Username"
+                name="name"
                 placeholder="Masukkan Username"
+                onChange={handleChange}
+              />
+              <LoginInput
+                id="Email"
+                label="Email"
+                name="email"
+                placeholder="Masukkan Email"
+                onChange={handleChange}
               />
               <PasswordInput
                 id="password"
                 label="Password"
+                name="password"
                 placeholder="Masukkan kata sandi"
+                onChange={handleChange}
               />
-
+{/* 
               <PasswordInput
                 id="confirmPassword"
                 label="Konfirmasi kata sandi"
                 placeholder="Masukkan kata sandi"
-              />
+                onChange={handleChange}
+              /> */}
 
               <h1 className="text-[#C1C2C4] mt-3 font-lato mr-auto max-[500px]:text-sm">Sudah punya akun? <Link to="/" class="text-white">Masuk</Link></h1>
 
-              <NavLink to="/home" className="mt-8 font-lato font-semibold text-white bg-[#3D4142] border border-[#E7E3FC3B]/35 rounded-full flex justify-center items-center text-base max-[1300px]:text-sm h-[55px] w-full">
+              <button type='submit' className="mt-8 font-lato font-semibold text-white bg-[#3D4142] border border-[#E7E3FC3B]/35 rounded-full flex justify-center items-center text-base max-[1300px]:text-sm h-[55px] w-full">
                   Daftar
-              </NavLink>
+              </button>
 
               <h1 className="mx-auto text-[#9D9EA1] text-sm w-max my-2">Atau</h1>
               
