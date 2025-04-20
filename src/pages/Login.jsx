@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
-import TextInput from "../components/TextInput";
+import LoginInput from "../components/LoginInput";
 import PasswordInput from "../components/PasswordInput";
   const LoginPage = () => {
     useEffect(() => {
@@ -19,7 +19,7 @@ import PasswordInput from "../components/PasswordInput";
               <p className="text-white text-sm font-normal mt-2">Selamat datang kembali!</p>
           </div>
           <form action="" className="w-full"> 
-              <TextInput
+              <LoginInput
                 id="username"
                 label="Username"
                 placeholder="Masukkan Username"

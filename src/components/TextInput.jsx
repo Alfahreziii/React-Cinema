@@ -1,36 +1,46 @@
-// components/TextInput.jsx
-import React from "react";
+import React, { useState } from "react";
 
 const TextInput = ({
-  id,
   label,
+  id,
   type = "text",
-  placeholder,
-  value,
-  onChange,
-  className = "",
-  icon = null,
+  value : propValue,
+  onChange: propOnChange,
+  name,
+  icon,
   ...props
 }) => {
+    const [localValue, setLocalValue] = useState("");
+
+    const value = propValue !== undefined ? propValue : localValue;
+    const onChange = propOnChange !== undefined ? propOnChange : (e) => setLocalValue(e.target.value);
+  
+    const hasValue = value?.toString().length > 0;
+    const [isFocused, setIsFocused] = useState(false);
+
   return (
-    <div className="w-full mt-6">
-      {label && (
-        <label htmlFor={id} className="text-white max-[500px]:text-base max-[500px]:font-light text-lg font-lato font-medium mb-2 block">
-          {label}
-        </label>
-      )}
-      <div className="relative w-full">
-        <input
-          id={id}
-          type={type}
-          className={`w-full border rounded-full h-[45px] text-white border-[#E7E3FC3B]/35 placeholder-[#C1C2C4] px-5 placeholder-lato max-[1300px]:text-base text-lg ${icon ? "pr-12" : ""} ${className}`}
-          placeholder={placeholder}
-          value={value}
-          onChange={onChange}
-          {...props}
-        />
-        {icon && <div className="absolute inset-y-0 right-4 flex items-center">{icon}</div>}
-      </div>
+    <div className="relative w-full mt-8">
+      <input
+        id={id}
+        type={type}
+        value={value}
+        onChange={onChange}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        name={name}
+        className="bg-[#22282A] w-full h-[60px] font-lato px-4 pt-4 pb-2 text-white border border-[#E7E3FC3B]/23 rounded-md placeholder-transparent focus:outline-none focus:border-white transition-all"
+        placeholder={label}
+        {...props}
+      />
+      <label
+        htmlFor={id}
+        className={`absolute left-4 top-2 text-[#9D9EA1] text-base transition-all duration-200 
+          ${isFocused || hasValue ? "text-sm mb-2 top-1" : "top-4"}
+        `}
+      >
+        {label}
+      </label>
+      {icon && <div className="absolute inset-y-0 right-4 flex items-center">{icon}</div>}
     </div>
   );
 };

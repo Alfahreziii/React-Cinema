@@ -37,9 +37,9 @@ const HomePage = () => {
           </div>
       </div>
     </div>
-    <div class="px-16 max-[780px]:px-8 max-[480px]:px-5 relative -mt-16">
-      <MovieSlider movies={sampleMovies}/>
-    </div>
+
+    <MovieSlider movies={sampleMovies}/>
+    
     </>
   )
 }
