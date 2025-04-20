@@ -3,7 +3,7 @@ import React, { useState } from "react";
 const TextInput = ({
   label,
   id,
-  type = "text",
+  type,
   value : propValue,
   onChange: propOnChange,
   name,

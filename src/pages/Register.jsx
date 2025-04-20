@@ -63,7 +63,7 @@ const RegisterPage = () => {
                 onChange={handleChange}
               /> */}
 
-              <h1 className="text-[#C1C2C4] mt-3 font-lato mr-auto max-[500px]:text-sm">Sudah punya akun? <Link to="/" class="text-white">Masuk</Link></h1>
+              <h1 className="text-[#C1C2C4] mt-3 font-lato mr-auto max-[500px]:text-sm">Sudah punya akun? <Link to="/login" class="text-white">Masuk</Link></h1>
 
               <button type='submit' className="mt-8 font-lato font-semibold text-white bg-[#3D4142] border border-[#E7E3FC3B]/35 rounded-full flex justify-center items-center text-base max-[1300px]:text-sm h-[55px] w-full">
                   Daftar

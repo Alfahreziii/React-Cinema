@@ -1,10 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import TextInput from '../components/TextInput';
 import MovieSlider from "../components/MovieSlider";
 import daftarSayaFilm from "../data/daftarSayaFilm"
+import { updateUser, deleteUserById } from "../services/authService";
 
 const ProfilePage = () => {
+    const [user, setUser] = useState({ name: "", email: "", password: "" });
+
+    const handleSave = (e) => {
+        e.preventDefault();
+
+        updateUser(user);
+        alert("Profil berhasil diperbarui!");
+    };  
+
+    const handleDeleteAccount = () => {
+        const confirmDelete = window.confirm("Yakin ingin menghapus akun ini?");
+        if (confirmDelete) {
+          deleteUserById(user.id);
+          alert("Akun berhasil dihapus");
+          window.location.href = "/login";
+        }
+      };
+      
+
+    useEffect(() => {
+    const storedUser = localStorage.getItem("loggedInUser");
+    if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        setUser({
+        id: parsedUser.id,
+        name: parsedUser.name || "",
+        email: parsedUser.email || "",
+        password: parsedUser.password || ""
+        });
+    }
+    }, []);
+
     return (
         <>
         <div className="w-full py-10 px-16 mt-20 max-[780px]:px-8 max-[480px]:px-5">
@@ -27,11 +60,14 @@ const ProfilePage = () => {
                                 </div>
                             </div>
                         </div>
-                        <form action="">
+                        <form onSubmit={handleSave}>
                             <TextInput 
                                 id="name"
+                                type="text"
                                 label="Nama Lengkap"
                                 name="name"
+                                value={user.name}
+                                onChange={(e) => setUser({ ...user, name: e.target.value })}
                                 icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 text-white">
                                     <path d="m2.695 14.762-1.262 3.155a.5.5 0 0 0 .65.65l3.155-1.262a4 4 0 0 0 1.343-.886L17.5 5.501a2.121 2.121 0 0 0-3-3L3.58 13.419a4 4 0 0 0-.885 1.343Z" />
                                 </svg>
@@ -39,21 +75,27 @@ const ProfilePage = () => {
                             />
                             <TextInput 
                                 id="Email"
+                                type="text"
                                 label="Email"
                                 name="Email"
+                                value={user.email}
                                 disabled
                             />
-                            <TextInput 
-                                id="katasandi"
-                                type='password'
-                                label="Kata Sandi"
-                                name="katasandi"
-                                icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 text-white">
-                                    <path d="m2.695 14.762-1.262 3.155a.5.5 0 0 0 .65.65l3.155-1.262a4 4 0 0 0 1.343-.886L17.5 5.501a2.121 2.121 0 0 0-3-3L3.58 13.419a4 4 0 0 0-.885 1.343Z" />
-                                </svg>
-                                }
+                            <TextInput
+                            id="password"
+                            type="password"
+                            label="Kata Sandi"
+                            name="password"
+                            value={user.password}
+                            onChange={(e) => setUser({ ...user, password: e.target.value })}
+                            icon={<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5 text-white">
+                                <path d="m2.695 14.762-1.262 3.155a.5.5 0 0 0 .65.65l3.155-1.262a4 4 0 0 0 1.343-.886L17.5 5.501a2.121 2.121 0 0 0-3-3L3.58 13.419a4 4 0 0 0-.885 1.343Z" />
+                            </svg>}
                             />
-                            <button type='submit' className="bg-[#0F1E93] mt-8 flex items-center px-6 max-[480px]:px-5 py-2 max-[480px]:py-1 text-center text-white font-lato font-bold rounded-full max-[480px]:text-sm">Simpan</button>
+                            <div className="flex gap-5">
+                                <button type='submit' className="bg-[#0F1E93] mt-8 flex items-center px-6 max-[480px]:px-5 py-2 max-[480px]:py-1 text-center text-white font-lato font-bold rounded-full max-[480px]:text-sm">Simpan</button>
+                                <button type='button' onClick={handleDeleteAccount} className="bg-red-500 mt-8 flex items-center px-6 max-[480px]:px-5 py-2 max-[480px]:py-1 text-center text-white font-lato font-bold rounded-full max-[480px]:text-sm">Haous</button>
+                            </div>
                         </form>
                     </div>
                     <div className="w-1/2 max-[750px]:w-full">

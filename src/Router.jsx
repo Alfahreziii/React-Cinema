@@ -14,7 +14,7 @@ const Router = () => {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
 
-                <Route path="home" element={ <ProtectedRoute><Layout /></ProtectedRoute>}>
+                <Route path="/" element={ <ProtectedRoute><Layout /></ProtectedRoute>}>
                     <Route index element={<HomePage />}/>
                     <Route path="profile" element={<ProfilePage />} />
                 </Route>

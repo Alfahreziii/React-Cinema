@@ -25,7 +25,7 @@ export function registerUser(name, email, password) {
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem("loggedInUser", JSON.stringify(user));
   
-      window.location.href = "/home";
+      window.location.href = "/";
       return user;
     }
   
@@ -38,8 +38,35 @@ export function registerUser(name, email, password) {
     return JSON.parse(localStorage.getItem("loggedInUser"));
   }
   
-  export function logoutUser() {
+
+export const updateUser = (user) => {
+    localStorage.setItem("loggedInUser", JSON.stringify(user));
+};
+
+export const logout = () => {
     localStorage.removeItem("isLoggedIn");
     localStorage.removeItem("loggedInUser");
-  }
+};
+
+export const deleteUserById = (id) => {
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const numericId = Number(id);
+    console.log("ID yang akan dihapus:", numericId);
+    console.log("Semua user:", users);
+  
+    const deleteUser = users.filter((user) => user.id !== numericId);
+    console.log("User setelah dihapus:", deleteUser);
+  
+    localStorage.setItem("users", JSON.stringify(deleteUser));
+  
+    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
+    if (loggedInUser?.id === numericId) {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("loggedInUser");
+    }
+  };
+  
+   
+  
+  
   
