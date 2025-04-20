@@ -4,6 +4,7 @@ import LoginPage from "./pages/Login.jsx"
 import RegisterPage from "./pages/Register.jsx"
 import HomePage from "./pages/HomePage.jsx"
 import Layout from "./components/Layout.jsx";
+import ProfilePage from "./pages/ProfilePage.jsx";
 const Router = () => {
 
     return (
@@ -14,6 +15,7 @@ const Router = () => {
 
                 <Route path="home" element={<Layout />}>
                     <Route index element={<HomePage />}/>
+                    <Route path="profile" element={<ProfilePage />} />
                 </Route>
             </Routes>
         </BrowserRouter>  

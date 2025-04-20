@@ -23,8 +23,10 @@ const Navbar = ({ links }) => {
     <nav className="bg-[#181A1C] w-full top-0 px-16 max-[480px]:px-5 max-[780px]:px-8 py-5 fixed z-[99999]">
         <div className="flex items-center">
             <div className="flex">
-                <img src="/images/logo.png" alt="" className="w-[100px] mr-10 max-[710px]:hidden"/>
-                <img src="/images/logo2.png" alt="" className="w-[30px] mr-10 max-[480px]:mr-1 min-[710px]:hidden"/>
+                <Link to="/home" className="flex items-center">
+                  <img src="/images/logo.png" alt="" className="w-[100px] mr-10 max-[710px]:hidden"/>
+                  <img src="/images/logo2.png" alt="" className="w-[30px] mr-10 max-[480px]:mr-1 min-[710px]:hidden"/>
+                </Link>
                 {links.map((link) => (
                     <NavLink
                     key={links.id}
@@ -49,7 +51,7 @@ const Navbar = ({ links }) => {
 
                 {isOpen && (
                     <div className="absolute right-0 top-10 w-48 bg-[#181A1C] shadow-[#3E434A4F]/31 rounded-lg p-2" id="dropdown-menu">
-                        <Link className="text-white px-4 py-2 rounded hover:text-[#3254FF] flex">
+                        <Link to="profile" className="text-white px-4 py-2 rounded hover:text-[#3254FF] flex">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5 mr-1">
                         <path fill-rule="evenodd" d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z" clip-rule="evenodd" />
                         </svg>

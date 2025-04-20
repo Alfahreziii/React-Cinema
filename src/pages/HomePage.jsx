@@ -5,7 +5,7 @@ import sampleMovies from "../data/movie"
 const HomePage = () => {
   return (
     <>
-    <div className="bg-hero relative w-full mt-16">
+    <div className="bg-hero bg-[url(/images/bg-hero.png)] relative w-full mt-20">
       <div className="absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-[#181A1C] to-[#181A1C]/0 z-10"></div>
       <div className="absolute w-full bottom-0 px-16 max-[780px]:px-8 max-[480px]:px-5 pb-20 z-20">
           <div className="w-[60%] max-[790px]:w-full">

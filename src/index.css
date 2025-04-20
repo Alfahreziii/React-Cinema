@@ -14,7 +14,7 @@
 }
 
 .bg-hero {
-    @apply bg-[url(/images/bg-hero.png)] relative w-full h-[587px] flex items-center justify-center bg-cover bg-center;
+    @apply relative w-full h-[587px] flex items-center justify-center bg-cover bg-center;
     display: flex;
     align-items: center;
     justify-content: center;
