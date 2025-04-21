@@ -6,6 +6,7 @@ import HomePage from "./pages/HomePage.jsx"
 import Layout from "./components/Layout.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import SeriesPage from "./pages/SeriesPage.jsx";
 const Router = () => {
 
     return (
@@ -17,6 +18,7 @@ const Router = () => {
                 <Route path="/" element={ <ProtectedRoute><Layout /></ProtectedRoute>}>
                     <Route index element={<HomePage />}/>
                     <Route path="profile" element={<ProfilePage />} />
+                    <Route path="series" element={<SeriesPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>  

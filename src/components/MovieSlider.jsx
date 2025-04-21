@@ -1,4 +1,3 @@
-import React from 'react';
 import MovieCard from './MovieCard';
 
 const groupMoviesByCategory = (movies) => {
@@ -9,9 +8,15 @@ const groupMoviesByCategory = (movies) => {
       return acc;
     }, {});
   };
+    
+  const MovieSlider = ({ movies, selectedGenre }) => {
 
-const MovieSlider = ({ movies }) => {
-  const groupedMovies = groupMoviesByCategory(movies);
+  const filteredMovies = selectedGenre
+  ? movies.filter((movie) => movie.genres.includes(selectedGenre))
+  : movies;
+
+  const groupedMovies = groupMoviesByCategory(filteredMovies);
+
 
   return (
     <>

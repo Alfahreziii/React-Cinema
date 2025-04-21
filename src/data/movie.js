@@ -4,21 +4,21 @@ const sampleMovies = [
         category: "Melanjutkan Tonton Film",
         episodes: 16,
         ageRating: "13+",
-        genres: ["Misteri", "Kriminal", "Fantasi"]
+        genres: ["Aksi", "Drama"]
     },
     { 
         image: "/images/gambar2.png", 
         category: "Melanjutkan Tonton Film",
         episodes: 16,
         ageRating: "13+",
-        genres: ["Misteri", "Kriminal", "Fantasi"]
+        genres: ["Aksi", "Komedi"]
     },
     { 
         image: "/images/gambar3.png", 
         type: "new-episode", category: "Melanjutkan Tonton Film",
         episodes: 16,
         ageRating: "13+",
-        genres: ["Misteri", "Kriminal", "Fantasi"]
+        genres: ["Aksi", "Thriller"]
     },
     { 
         image: "/images/gambar4.png", 
@@ -41,7 +41,7 @@ const sampleMovies = [
         category: "Top Rating Film dan Series Hari ini",
         episodes: 16,
         ageRating: "13+",
-        genres: ["Misteri", "Kriminal", "Fantasi"]
+        genres: ["Misteri", "Drama", "Anime"]
     },
     { 
         image: "/images/panjang2.png", 

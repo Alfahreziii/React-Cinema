@@ -94,7 +94,7 @@ const ProfilePage = () => {
                             />
                             <div className="flex gap-5">
                                 <button type='submit' className="bg-[#0F1E93] mt-8 flex items-center px-6 max-[480px]:px-5 py-2 max-[480px]:py-1 text-center text-white font-lato font-bold rounded-full max-[480px]:text-sm">Simpan</button>
-                                <button type='button' onClick={handleDeleteAccount} className="bg-red-500 mt-8 flex items-center px-6 max-[480px]:px-5 py-2 max-[480px]:py-1 text-center text-white font-lato font-bold rounded-full max-[480px]:text-sm">Haous</button>
+                                <button type='button' onClick={handleDeleteAccount} className="bg-red-500 mt-8 flex items-center px-6 max-[480px]:px-5 py-2 max-[480px]:py-1 text-center text-white font-lato font-bold rounded-full max-[480px]:text-sm">Hapus</button>
                             </div>
                         </form>
                     </div>

@@ -8,11 +8,10 @@ const genre = [
     { id: 7, name: "Kejahatan" },
     { id: 8, name: "KDrama" },
     { id: 9, name: "Komedi" },
-    { id: 10, name: "Petualangan" },
-    { id: 11, name: "Perang" },
-    { id: 12, name: "Romantis" },
+    { id: 10, name: "Fantasi" },
+    { id: 11, name: "Kriminal" },
+    { id: 12, name: "Misteri" },
     { id: 13, name: "Sains & Alam" },
-    { id: 14, name: "Thriller" },
   ];
   
 export default genre;
