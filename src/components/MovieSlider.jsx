@@ -20,7 +20,7 @@ const groupMoviesByCategory = (movies) => {
 
   return (
     <>
-      <div class="px-16 max-[780px]:px-8 max-[480px]:px-5 relative -mt-16">
+      <div className="px-16 max-[780px]:px-8 max-[480px]:px-5 relative -mt-16">
         {Object.entries(groupedMovies).map(([category, grouped]) => (
           <div key={category} className="mt-20">
             <h2 className="text-white text-2xl font-lato font-bold mb-4">{category}</h2>

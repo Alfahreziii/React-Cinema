@@ -1,72 +1,109 @@
-export function registerUser(name, email, password) {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-  
-    const existingUser = users.find(user => user.email === email);
-    if (existingUser) {
-      alert("Email sudah terdaftar.");
-      return null;
-    }
-  
-    const newUser = { id: Date.now(), name, email, password };
-    users.push(newUser);
-    localStorage.setItem("users", JSON.stringify(users));
-  
-    window.location.href = "/login";
-  
-    return newUser;
-  }
-  
-  
-  export function loginUser(email, password) {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const user = users.find((u) => u.email === email && u.password === password);
-  
-    if (user) {
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("loggedInUser", JSON.stringify(user));
-  
-      window.location.href = "/";
-      return user;
-    }
-  
-    alert("Email atau password salah.");
-    return null;
-  }
-  
-  
-  export function getLoggedInUser() {
-    return JSON.parse(localStorage.getItem("loggedInUser"));
-  }
-  
+import { auth, db } from "../models/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  deleteUser,
+  signOut,
+  updatePassword
+} from "firebase/auth";
+import {
+  doc,
+  setDoc,
+  getDoc,
+  updateDoc,
+  deleteDoc
+} from "firebase/firestore";
 
-export const updateUser = (user) => {
-    localStorage.setItem("loggedInUser", JSON.stringify(user));
+// Register & Save Profile
+export const registerUser = async ({ email, password, displayName }) => {
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+
+    // Simpan ke Firestore
+    await setDoc(doc(db, "users", res.user.uid), {
+      email: res.user.email,
+      displayName: displayName,
+      createdAt: new Date()
+    });
+
+    return { success: true, user: res.user };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
 };
 
-export const logout = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("loggedInUser");
+// Login 
+export const loginUser = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return { success: true, user: userCredential.user };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
 };
 
-export const deleteUserById = (id) => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
-    const numericId = Number(id);
-    console.log("ID yang akan dihapus:", numericId);
-    console.log("Semua user:", users);
-  
-    const deleteUser = users.filter((user) => user.id !== numericId);
-    console.log("User setelah dihapus:", deleteUser);
-  
-    localStorage.setItem("users", JSON.stringify(deleteUser));
-  
-    const loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-    if (loggedInUser?.id === numericId) {
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("loggedInUser");
-    }
-  };
-  
-   
-  
-  
-  
+// Get Current User Profile
+export const getCurrentUserProfile = async () => {
+  const user = auth.currentUser;
+  if (!user) return null;
+
+  const userDoc = await getDoc(doc(db, "users", user.uid));
+  return userDoc.exists() ? userDoc.data() : null;
+};
+
+// Update Profile
+export const updateUserProfile = async ({ displayName }) => {
+  try {
+    const user = auth.currentUser;
+    if (!user) return { success: false, error: "No user logged in" };
+
+    // Update Firebase Auth
+    await updateProfile(user, { displayName });
+
+    // Update Firestore
+    await updateDoc(doc(db, "users", user.uid), { displayName });
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export const changeUserPassword = async (newPassword) => {
+  try {
+    const user = auth.currentUser;
+    if (!user) throw new Error("User tidak ditemukan.");
+    await updatePassword(user, newPassword);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+// Delete Account
+export const deleteAccount = async () => {
+  try {
+    const user = auth.currentUser;
+    if (!user) return { success: false, error: "No user logged in" };
+
+    // Hapus dari Firestore dulu
+    await deleteDoc(doc(db, "users", user.uid));
+    // Hapus akun dari Firebase Auth
+    await deleteUser(user);
+
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+//logout
+export const logout = async () => { 
+  try {
+    await signOut(auth);
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
