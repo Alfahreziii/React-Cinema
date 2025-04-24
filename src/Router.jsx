@@ -1,12 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { lazy } from "react";
 
-import LoginPage from "./pages/Login.jsx"
-import RegisterPage from "./pages/Register.jsx"
-import HomePage from "./pages/HomePage.jsx"
-import Layout from "./components/Layout.jsx";
-import ProfilePage from "./pages/ProfilePage.jsx";
-import ProtectedRoute from "./components/ProtectedRoute.jsx";
-import SeriesPage from "./pages/SeriesPage.jsx";
+const LoginPage = lazy(() => import ("./pages/Login.jsx"));
+const RegisterPage= lazy(() => import ("./pages/Register.jsx"));
+const HomePage = lazy(() => import ("./pages/HomePage.jsx"));
+const Layout = lazy(() => import ("./components/Layout.jsx"));
+const ProfilePage = lazy(() => import ("./pages/ProfilePage.jsx"));
+const ProtectedRoute = lazy(() => import ("./components/ProtectedRoute.jsx"));
+const SeriesPage = lazy(() => import ("./pages/SeriesPage.jsx"));
 const Router = () => {
 
     return (
