@@ -8,6 +8,7 @@ const Layout = lazy(() => import ("./components/Layout.jsx"));
 const ProfilePage = lazy(() => import ("./pages/ProfilePage.jsx"));
 const ProtectedRoute = lazy(() => import ("./components/ProtectedRoute.jsx"));
 const SeriesPage = lazy(() => import ("./pages/SeriesPage.jsx"));
+
 const Router = () => {
 
     return (
