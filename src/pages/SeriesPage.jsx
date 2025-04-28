@@ -20,7 +20,7 @@ const SeriesPage = () => {
       <div className="absolute w-full bottom-0 px-16 max-[780px]:px-8 max-[480px]:px-5 pb-20 z-20">
           <div className="w-[60%] max-[790px]:w-full">
               <h1 className="text-white font-bold font-lato text-5xl max-[600px]:text-4xl">Happiness</h1>
-              <p className="text-white font-lato text-base mt-7 max-[600px]:hidden">Mengisahkan tentang kelompok orang yang berjuang untuk bertahan hidup di dalam sebuah gedung apartemen 
+              <p className="text-white font-lato text-base mt-7 max-[600px]:hidden">Mengisahkann tentang kelompok orang yang berjuang untuk bertahan hidup di dalam sebuah gedung apartemen 
                 yang penuh dengan zombie. Sayangnya, virus zombie hanya terdapat di dalam area apartemen tersebut dan tidak menyebar ke luar kawasan apartemen.</p>
               <p className="text-white font-lato text-base mt-7 min-[600px]:hidden">Mengisahkan tentang kelompok orang yang berjuang untuk bertahan hidup di dalam sebuah gedung apartemen </p>
           </div>
