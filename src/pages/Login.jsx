@@ -17,18 +17,29 @@ const LoginPage = () => {
     setForm({ ...form, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const result = await loginUser(form.email, form.password);
-    
-    if (result.success) {
-      dispatch(setUser(result.user)); // Set user in Redux state
-      navigate("/");  // Navigate to home
-    } else {
-      setError("Email atau password salah!");
-      dispatch(setAlert({ message: "Login failed", type: "error" }));  // Set alert in Redux
-    }
-  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  const result = await loginUser(form.email, form.password);
+
+  if (result.success) {
+    const user = result.user;
+
+    // Buat objek user minimal yang serializable
+    const simpleUser = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName || "",
+      photoURL: user.photoURL || "",
+    };
+
+    dispatch(setUser(simpleUser)); 
+    navigate("/");
+  } else {
+    setError("Email atau password salah!");
+    dispatch(setAlert({ message: "Login failed", type: "error" }));
+  }
+};
+
 
   useEffect(() => {
     document.body.classList.add('login');

@@ -8,6 +8,7 @@ const Layout = lazy(() => import ("./components/Layout.jsx"));
 const ProfilePage = lazy(() => import ("./pages/ProfilePage.jsx"));
 const ProtectedRoute = lazy(() => import ("./components/ProtectedRoute.jsx"));
 const SeriesPage = lazy(() => import ("./pages/SeriesPage.jsx"));
+const FilmPage = lazy(() => import ("./pages/FilmPage.jsx"));
 
 const Router = () => {
 
@@ -21,6 +22,7 @@ const Router = () => {
                     <Route index element={<HomePage />}/>
                     <Route path="profile" element={<ProfilePage />} />
                     <Route path="series" element={<SeriesPage />} />
+                    <Route path="film" element={<FilmPage />} />
                 </Route>
             </Routes>
         </BrowserRouter>  

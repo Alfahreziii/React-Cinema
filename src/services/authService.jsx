@@ -5,12 +5,12 @@ import {
   updateProfile,
   deleteUser,
   signOut,
+  getAuth,
   updatePassword
 } from "firebase/auth";
 import {
   doc,
   setDoc,
-  getDoc,
   updateDoc,
   deleteDoc
 } from "firebase/firestore";
@@ -43,14 +43,25 @@ export const loginUser = async (email, password) => {
   }
 };
 
-// Get Current User Profile
-export const getCurrentUserProfile = async () => {
-  const user = auth.currentUser;
-  if (!user) return null;
-
-  const userDoc = await getDoc(doc(db, "users", user.uid));
-  return userDoc.exists() ? userDoc.data() : null;
+export const getCurrentUserProfile = () => {
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
+  if (currentUser) {
+    return {
+      displayName: currentUser.displayName,
+      email: currentUser.email,
+    };
+  }
+  return null;
 };
+// Get Current User Profile
+// export const getCurrentUserProfile = async () => {
+//   const user = auth.currentUser;
+//   if (!user) return null;
+
+//   const userDoc = await getDoc(doc(db, "users", user.uid));
+//   return userDoc.exists() ? userDoc.data() : null;
+// };
 
 // Update Profile
 export const updateUserProfile = async ({ displayName }) => {

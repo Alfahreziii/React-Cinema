@@ -1,30 +1,42 @@
 import { Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { auth } from "../models/firebase";  // Pastikan path sesuai dengan lokasi file Firebase kamu
+import { auth } from "../models/firebase";  
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/userSlice";
 
 export default function ProtectedRoute({ children }) {
   const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [user, setUserLocal] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((currentUser) => {
       if (currentUser) {
-        setUser(currentUser); // Jika pengguna ada, set user
+        setUserLocal(currentUser);
+        
+        // Update Redux state dengan user minimal saja
+        dispatch(setUser({
+          uid: currentUser.uid,
+          email: currentUser.email,
+          displayName: currentUser.displayName || "",
+          photoURL: currentUser.photoURL || "",
+        }));
       } else {
-        setUser(null); // Jika tidak ada pengguna, set null
+        setUserLocal(null);
+        dispatch(setUser(null)); // Clear Redux user state saat logout
       }
       setLoading(false);
     });
 
-    return () => unsubscribe(); // Membersihkan listener saat komponen di-unmount
-  }, []);
+    return () => unsubscribe();
+  }, [dispatch]);
 
   if (loading) {
-    return <div>Loading...</div>;  // Menampilkan loading jika status autentikasi sedang diperiksa
+    return <div>Loading...</div>;
   }
 
   if (!user) {
-    return <Navigate to="/login" replace />;  // Redirect ke login jika tidak ada user
+    return <Navigate to="/login" replace />;
   }
 
   return children;
